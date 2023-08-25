@@ -2,6 +2,8 @@
 
 ## Overview
 
+Most of this if from old glimpse pipelien that exists here:https://github.com/odelaneau/GLIMPSE. The current script was modified for hg38 and to include respective reference panel. 
+
 This workflow provides an end-to-end example of an imputation with GLIMPSE. The only dependency required is snakemake itself (`conda create -c conda-forge -c bioconda -n snakemake snakemake`). All other tools (bwa, gatk, rasusa, samtools, bcftools, and GLIMPSE) are integrated into the workflow using conda and singularity. The workflow performs the following:
 
 1. Downloads the human reference genome (GRCh37).
