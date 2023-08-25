@@ -1,0 +1,37 @@
+# GLIMPSE Example Snakemake Workflow
+
+## Overview
+
+This workflow provides an end-to-end example of an imputation with GLIMPSE. The only dependency required is snakemake itself (https://snakemake.readthedocs.io/en/stable/getting_started/installation.html#:~:text=Installation%20via%20Conda%2FMamba%20%C2%B6%201%20Full%20installation%20%C2%B6,on%20Bioconda%20as%20a%20package%20source%20%C2%B6%20).
+
+Broadly, the pipeline needs to be run in 4 steps. 
+
+1. Build glimpse reference panel.
+2. (Optional) Rename chr (eg., 1 to chr1), this depends on input reference genome being used. 
+3. Genearte chunk files from the reference genomes.
+4. Run the imputation script.
+
+
+The script assumes sample genome has already been aligned to the human reference genome (hg38), sorted, and duplicates been marked. 
+
+Building reference panel and renaming chr, needs to be done only once unless changing the input reference panel. 
+
+Detailed steps:
+
+1. SAMPLES and DIR are hardcoded. Something that can be changed depending on the samples, a python code can be added to this script.   
+2. In case samples are subsampled, add the coverage info and add it to the code that follows. 
+3. Create the glimpse imputation panel.
+4. For each coverage, call variants with BCFtools. 
+5. Perform low-coverage WGS with GLIMPSE. 
+
+To build reference panel:
+snakemake -s build_glimpse_panel_sm.smk -c128
+
+To rename chr:
+snakemake -s chrNameChange.smk -c128
+
+To make chunks:
+snakemake -s Make_chunks_sm.smk -c128
+
+To run glimpse:
+snakemake -s Snakefile_sm_06302023_.smk -c128
